@@ -2,12 +2,13 @@ import csv
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 
-# Point weights from the Algorithm Recipe in README.md (max 4.5 points)
-GENRE_MATCH_POINTS = 1.5
-GENRE_RELATED_POINTS = 0.75
+# Point weights (max 5.25 points)
+# Experiment "Weight Shift": genre halved (was 1.5 / 0.75), energy doubled (was 1.5)
+GENRE_MATCH_POINTS = 0.75
+GENRE_RELATED_POINTS = 0.375
 MOOD_MATCH_POINTS = 1.0
 MOOD_FAMILY_POINTS = 0.5
-ENERGY_MAX_POINTS = 1.5
+ENERGY_MAX_POINTS = 3.0
 ACOUSTIC_MAX_POINTS = 0.5
 
 # Moods in the same family earn partial credit
