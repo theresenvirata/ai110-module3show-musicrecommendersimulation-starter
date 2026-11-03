@@ -21,16 +21,35 @@ Prompts:
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
+Think of the recommender as a judge at a talent show. It looks at every song in the catalog one at a time, gives each one points based on how well it fits what you asked for, and then lines the songs up from highest score to lowest. The top five are your recommendations.
 
-Prompts:  
+**What it knows about you**
 
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
+- Your favorite genre (for example, pop)
+- The mood you're in (for example, happy)
+- How energetic you want the music to be, on a scale from calm to intense
+- Optionally, whether you like acoustic songs or prefer electronic, produced ones
 
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+**What it looks at in each song**
+
+Every song has a genre, a mood, an energy level, and an "acousticness" rating. The songs also have tempo, positivity, and danceability, but the judge ignores those for now. Tempo and danceability mostly repeat what energy already says.
+
+**How a song earns points**
+
+1. **Genre (worth the most).** A song in your exact genre gets full points. A song in a closely related genre, like "indie pop" when you asked for "pop," gets half.
+2. **Mood.** A song with your exact mood gets full points. A song with a similar mood gets half. For example, if you want "chill," a "relaxed" or "focused" song still earns some credit, because they belong to the same calm family.
+3. **Energy.** This is about being *close*, not being *loud*. If you want medium energy, a medium-energy song scores best, and a very calm or very intense song scores lower. The further a song is from what you asked for, the fewer points it gets.
+4. **Acoustic sound (a small tie-breaker).** If you said you like acoustic music, more acoustic songs get a little bonus. If you prefer produced music, it works the other way. If you didn't say, this step is skipped.
+
+A song can earn at most 4.5 points. Genre counts the most because it reflects lasting taste. Mood and energy together still outweigh genre, so a song that matches your vibe can beat a song that only shares a genre label.
+
+**Why it shows its reasons**
+
+Next to every recommendation, the judge lists what earned the song its points, such as "genre match: pop (+1.50)." You can see exactly why a song was picked instead of trusting a mystery number.
+
+**Changes from the starter logic**
+
+The starter version returned the first five songs in the file, no matter who was asking. I replaced that with the point system above, added partial credit for related genres and similar moods, and made the energy score reward closeness instead of high energy.
 
 ---
 
